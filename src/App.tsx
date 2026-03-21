@@ -11,7 +11,7 @@ export default function App() {
   // Load page.json on startup (only if no persisted config)
   useEffect(() => {
     if (!config) {
-      fetch('/page.json')
+      fetch(`${import.meta.env.BASE_URL}page.json`)
         .then((r) => r.json())
         .then((data: PageConfig) => setConfig(data))
         .catch(console.error);
@@ -27,7 +27,8 @@ export default function App() {
   }
 
   // Route: /edit → editor, everything else → public page
-  const isEditor = window.location.pathname === '/edit';
+  // Use endsWith to work under any base path (dev: /edit, prod: /mnem-linkpage/edit)
+  const isEditor = window.location.pathname.endsWith('/edit');
 
   if (isEditor) {
     return <EditorLayout />;
