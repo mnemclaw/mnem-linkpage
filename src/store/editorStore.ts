@@ -14,7 +14,7 @@ interface EditorStore {
 export const useEditorStore = create<EditorStore>()((set) => ({
   selectedSectionId: null,
   isDirty: false,
-  isEditorOpen: false,
+  isEditorOpen: true,
 
   selectSection: (id) => set({ selectedSectionId: id }),
   deselectSection: () => set({ selectedSectionId: null }),
